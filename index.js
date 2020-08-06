@@ -85,7 +85,7 @@ finalScore(inning, 9) might return:
 // function counter2() {
 //   return count++;
 
-//   }
+  // }
 
 function finalScore(inning, num) {
   let home = 0;
@@ -119,10 +119,32 @@ and returns the score at each pont in the game, like so:
 8th inning: awayTeam - homeTeam
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
-
-
-function scoreboard(getInningScore, inning, number) {
-  
+function getInningScore(cb) {
+  return {home: cb(), away: cb()}
 }
 
-
+function scoreboard(cb1,cb2,numInnings) {
+ let awayTeam = 0
+ let homeTeam = 0
+  for (let i = 1; i <= numInnings; i++){
+    if (i === 1) {
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`1st inning: ${awayTeam} - ${homeTeam}`);
+    }else if (i === 2) {
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`2nd inning: ${awayTeam} - ${homeTeam}`);
+    } else if (i === 3) {
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`3rd inning: ${awayTeam} - ${homeTeam}`);
+    } else {
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`${i}st inning: ${awayTeam} - ${homeTeam}`);
+    }
+  }
+console.log(`Final Score: ${awayTeam} - ${homeTeam}`);
+}
+scoreboard(getInningScore, inning, 9)
